@@ -1,0 +1,8 @@
+.grid{
+  display: grid;
+  gap: 32px;
+}
+
+.grid > * {
+  min-width: 0;
+}

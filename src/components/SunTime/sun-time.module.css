@@ -1,0 +1,44 @@
+.sun-time{
+  display: flex;
+  justify-content: end;
+  gap: 24px;
+}
+
+.sun-time__text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sun-time__text > svg {
+  fill: var(--text-color)
+}
+
+.sun-time__secondary-text{
+  color: var(--secondary-text-color);
+  margin-top: 4px;
+}
+
+.sun-time__path{
+  width: 100%;
+  border: 2px solid #f59e0b;
+  border-bottom: 2px dotted var(--secondary-text-color);
+  border-radius: 50% / 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+}
+
+.sun-time__sun {
+  --progress: 0.75;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: calc(50% * (1 - cos(pi * var(--progress))));
+  bottom: calc(100% * sin(pi * var(--progress)));
+  background-color: #fcd34d;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #fef3c780;
+  transform: translate(-50%, 50%);
+}

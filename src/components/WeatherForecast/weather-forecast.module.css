@@ -1,0 +1,32 @@
+.weather-forecast {
+  width: 100%;
+}
+
+.weather-forecast__list{
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+}
+
+.weather-forecast__item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: calc(20% - 8px);
+  gap: 8px;
+}
+
+.weather-forecast__item__image{
+  width: 32px;
+  height: 32px;
+}
+
+.weather-forecast__item__temperature{
+  position: relative;
+}
+
+.weather-forecast__item__temperature::after{
+  content: "º";
+  position: absolute;
+  color: var(--secondary-text-color)
+}

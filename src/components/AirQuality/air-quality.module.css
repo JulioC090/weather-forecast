@@ -1,0 +1,26 @@
+.air-quality{
+  position: relative;
+}
+
+.tag{
+  background-color: #eab308;
+  padding: 4px 8px;
+  border-radius: 16px;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+}
+
+.component-list{
+  display: flex;
+  gap: 8px 32px;
+  flex-wrap: wrap;
+}
+
+.component-list__item{
+  width: calc(50% - 16px);
+}
+
+.component-list__item span {
+  font-weight: bold;
+}

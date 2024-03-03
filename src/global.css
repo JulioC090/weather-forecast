@@ -1,0 +1,30 @@
+:root {
+  --background: #09090A;
+  --foreground: #18181B;
+  --text-color: #f9fafb;
+  --secondary-text-color: #a1a1aa;
+  --focus: #4f46e5;
+  --placeholder: #52525b;
+}
+
+*,
+html,
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--background);
+}
+
+input {
+  background-color: var(--foreground);
+  offset: none;
+  border: none;
+  outline: none;
+}
