@@ -4,11 +4,9 @@
 
 .tag{
   background-color: #eab308;
+  height: fit-content;
   padding: 4px 8px;
   border-radius: 16px;
-  position: absolute;
-  top: 32px;
-  right: 32px;
 }
 
 .component-list{
@@ -23,4 +21,29 @@
 
 .component-list__item span {
   font-weight: bold;
+}
+
+.wrapper{
+  display: flex;
+  margin-bottom: 24px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.wrapper h2{
+  margin-bottom: 0px;
+}
+
+@media screen and (min-width: 768px){
+  .air-quality{
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .air-quality{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
 }

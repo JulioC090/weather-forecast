@@ -5,8 +5,10 @@ import styles from './air-quality.module.css';
 function AirQuality() {
   return (
     <Card className={styles['air-quality']}>
-      <h2>Qualidade do Ar</h2>
-      <span className={styles['tag']}>Moderado</span>
+      <div className={styles['wrapper']}>
+        <h2>Qualidade do Ar</h2>
+        <span className={styles['tag']}>Moderado</span>
+      </div>
       <div className={styles['component-list']}>
         <div className={styles['component-list__item']}>
           <span>CO:</span> 323.77

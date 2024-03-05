@@ -6,3 +6,18 @@
 .grid > * {
   min-width: 0;
 }
+
+@media screen and (min-width: 768px){
+  .grid{
+    min-height: calc(100vh - 64px);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .grid{
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr auto;
+  }
+}
