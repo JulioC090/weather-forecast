@@ -20,7 +20,7 @@ function App() {
         <SearchBar onSubmit={searchLocation} />
         {location && (
           <>
-            <CurrentWeather />
+            <CurrentWeather location={location} />
             <WeatherForecast />
             <AirQuality />
             <SunTime />
