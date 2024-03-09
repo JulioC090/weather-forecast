@@ -1,4 +1,8 @@
 .search-bar{
+  position: relative;
+}
+
+.search-bar__input-container{
   padding: 12px 16px;
   display: flex;
   align-items: center;
@@ -8,7 +12,7 @@
   border-radius: 8px;
 }
 
-.search-bar:focus-within{
+.search-bar__input-container:has(.search-bar__input[aria-activedescendant=""]:focus){
   border: var(--focus) 2px solid;
 }
 
@@ -23,6 +27,70 @@
 
 .search-bar__input:focus{
   outline: none;
+}
+
+.search-bar__clear-button{
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+  justify-items: center;
+  padding: 4px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+}
+
+.search-bar__clear-button:focus{
+  outline: var(--focus) 2px solid;
+}
+
+.search-bar__list-container{
+  position: absolute;
+  margin-top: 8px;
+  z-index: 1;
+}
+
+.search-bar__list{
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
+}
+
+.search-bar__item{
+  display: flex;
+  margin: -4px;
+  padding: 4px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+}
+
+.search-bar__item > svg{
+  fill: var(--secondary-text-color);
+}
+
+.search-bar__item__highlight{
+  display: inline;
+  color: var(--text-color)
+}
+
+.search-bar__item__information > *{
+  display: block;
+  color: var(--secondary-text-color);
+}
+
+.search-bar__item__city{
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.search-bar__item__state{
+  font-size: 12px;
+}
+
+.search-bar__item--active {
+  outline: var(--focus) 2px solid;
 }
 
 @media screen and (min-width: 768px){

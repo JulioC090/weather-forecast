@@ -1,20 +1,31 @@
+import { useState } from 'react';
 import AirQuality from './components/AirQuality';
 import Container from './components/Container';
 import CurrentWeather from './components/CurrentWeather';
 import Grid from './components/Grid';
-import SearchBar from './components/SearchBar';
+import SearchBar, { SearchResult } from './components/SearchBar';
 import SunTime from './components/SunTime';
 import WeatherForecast from './components/WeatherForecast';
 
 function App() {
+  const [location, setLocation] = useState<SearchResult | null>(null);
+
+  function searchLocation(result: SearchResult) {
+    setLocation(result);
+  }
+
   return (
     <Container>
       <Grid>
-        <SearchBar />
-        <CurrentWeather />
-        <WeatherForecast />
-        <AirQuality />
-        <SunTime />
+        <SearchBar onSubmit={searchLocation} />
+        {location && (
+          <>
+            <CurrentWeather />
+            <WeatherForecast />
+            <AirQuality />
+            <SunTime />
+          </>
+        )}
       </Grid>
     </Container>
   );
