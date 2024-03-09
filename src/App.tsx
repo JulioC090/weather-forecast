@@ -21,7 +21,7 @@ function App() {
         {location && (
           <>
             <CurrentWeather location={location} />
-            <WeatherForecast />
+            <WeatherForecast location={location} />
             <AirQuality />
             <SunTime />
           </>

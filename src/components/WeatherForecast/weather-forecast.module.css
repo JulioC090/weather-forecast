@@ -1,11 +1,33 @@
 .weather-forecast {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
 .weather-forecast__list{
   display: flex;
+  padding-bottom: 16px;
   gap: 32px;
+  flex-grow: 1;
   overflow-x: auto;
+}
+
+.weather-forecast__list::-webkit-scrollbar{
+  height: 4px;
+}
+
+.weather-forecast__list::-webkit-scrollbar-track {
+  background: #27272a;
+  border-radius: 16px;
+}
+
+.weather-forecast__list::-webkit-scrollbar-thumb {
+  background-color: var(--focus);
+  border-radius: 16px;
+}
+
+.weather-forecast__list::-webkit-scrollbar-thumb:hover {
+  background: var(--focus);
 }
 
 .weather-forecast__item{
