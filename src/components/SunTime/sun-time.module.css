@@ -21,8 +21,10 @@
 }
 
 .sun-time__path{
+  --progress: 0;
   width: 100%;
-  border: 2px solid #f59e0b;
+  background-color: var(--background);
+  border: 2px solid var(--path);
   border-bottom: 2px dotted var(--secondary-text-color);
   border-radius: 50% / 100%;
   border-bottom-left-radius: 0;
@@ -30,8 +32,17 @@
   position: relative;
 }
 
+.sun-time__path:has(.sun-time__sun){
+  --background: #fbbe2441;
+  --path: #f59e0b;
+}
+
+.sun-time__path:has(.sun-time__moon){
+  --background: #27272a;
+  --path: var(--secondary-text-color);
+}
+
 .sun-time__sun {
-  --progress: 0.75;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -39,7 +50,19 @@
   bottom: calc(100% * sin(pi * var(--progress)));
   background-color: #fcd34d;
   border-radius: 50%;
-  box-shadow: 0 0 20px #fef3c780;
+  box-shadow: 0 0 20px #fcd34d80;
+  transform: translate(-50%, 50%);
+}
+
+.sun-time__moon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: calc(50% * (1 - cos(pi * var(--progress))));
+  bottom: calc(100% * sin(pi * var(--progress)));
+  background-color: #d4d4d8;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #d4d4d880;
   transform: translate(-50%, 50%);
 }
 
