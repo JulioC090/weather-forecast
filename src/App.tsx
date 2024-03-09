@@ -22,7 +22,7 @@ function App() {
           <>
             <CurrentWeather location={location} />
             <WeatherForecast location={location} />
-            <AirQuality />
+            <AirQuality location={location} />
             <SunTime />
           </>
         )}

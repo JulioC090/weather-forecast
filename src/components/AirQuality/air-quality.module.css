@@ -3,10 +3,29 @@
 }
 
 .tag{
-  background-color: #eab308;
   height: fit-content;
   padding: 4px 8px;
   border-radius: 16px;
+}
+
+.tag[data-aqi="1"]{
+  background-color: #10B981;
+}
+
+.tag[data-aqi="2"]{
+  background-color: #FBBF24;
+}
+
+.tag[data-aqi="3"]{
+  background-color: #F59E0B;
+}
+
+.tag[data-aqi="4"]{
+  background-color: #EF4444;
+}
+
+.tag[data-aqi="5"]{
+  background-color: #6B7280;
 }
 
 .component-list{
