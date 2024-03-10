@@ -1,7 +1,7 @@
 import { MagnifyingGlass, MapPin, X } from '@phosphor-icons/react';
-import styles from './search-bar.module.css';
 import { useRef, useState } from 'react';
 import Card from '../../layout/Card';
+import styles from './search-bar.module.css';
 
 export type SearchResult = {
   wikiDataId: string;
@@ -41,6 +41,7 @@ function SearchBar({ onQueryChange, onSubmit }: SearchBarProps) {
 
     if (query.length <= 2) return;
     setResults([]);
+    setActiveDescendant(0);
 
     if (timer) {
       clearTimeout(timer);
@@ -107,7 +108,7 @@ function SearchBar({ onQueryChange, onSubmit }: SearchBarProps) {
           aria-haspopup="listbox"
           aria-expanded={results.length > 0}
           aria-activedescendant={
-            activedescendant
+            results.length > 0 && activedescendant
               ? results[activedescendant - 1].wikiDataId +
                 (activedescendant - 1)
               : ''
