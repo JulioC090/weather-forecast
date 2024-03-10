@@ -39,6 +39,7 @@ function SearchBar({ onSubmit }: SearchBarProps) {
     setSearchQuery(query);
 
     if (query.length <= 2) return;
+    setResults([]);
 
     if (timer) {
       clearTimeout(timer);
@@ -83,9 +84,15 @@ function SearchBar({ onSubmit }: SearchBarProps) {
       setActiveDescendant(nextActiveDescendant);
     }
 
-    if (event.key === 'Enter' && activedescendant) {
-      event.preventDefault();
-      handleSubmit(results[activedescendant - 1]);
+    if (event.key === 'Enter') {
+      if (activedescendant) {
+        event.preventDefault();
+        handleSubmit(results[activedescendant - 1]);
+      }
+
+      if (results) {
+        handleSubmit(results[0]);
+      }
     }
   }
 
