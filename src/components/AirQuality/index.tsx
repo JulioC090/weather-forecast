@@ -37,7 +37,7 @@ function AirQuality({ location }: AirQualityProps) {
 
   useEffect(() => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=bb3fe9249aa22592aa178dd7c454545b`,
+      `http://api.openweathermap.org/data/2.5/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
       { method: 'GET' },
     )
       .then((response) => response.json())

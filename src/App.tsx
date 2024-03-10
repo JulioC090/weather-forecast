@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     if (!location) return;
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&cnt=8&lang=pt&appid=bb3fe9249aa22592aa178dd7c454545b`,
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&cnt=8&lang=pt&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
       { method: 'GET' },
     )
       .then((response) => response.json())

@@ -40,7 +40,7 @@ function CurrentWeather({ location }: CurrentWeatherProps) {
 
   useEffect(() => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&lang=pt&appid=bb3fe9249aa22592aa178dd7c454545b`,
+      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&lang=pt&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
       { method: 'GET' },
     )
       .then((response) => response.json())
