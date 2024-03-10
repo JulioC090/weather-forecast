@@ -16,6 +16,17 @@ function App() {
   const [forecast, setForecast] = useState<Array<Forecast>>();
   const [sunPeriod, setSunPeriod] = useState<SunPeriod>();
 
+  async function getLocationSuggestions(query: string) {
+    const response = await fetch(
+      `https://corsproxy.io/?http://geodb-free-service.wirefreethought.com/v1/geo/places?namePrefix=${query}&hateoasMode=false&languageCode=pt_BR&limit=5&offset=0`,
+      { method: 'GET' },
+    );
+
+    const data = await response.json();
+
+    return data.data;
+  }
+
   function searchLocation(result: SearchResult) {
     setLocation(result);
     localStorage.setItem('location', JSON.stringify(result));
@@ -40,7 +51,10 @@ function App() {
   return (
     <Container>
       <Grid>
-        <SearchBar onSubmit={searchLocation} />
+        <SearchBar
+          onQueryChange={getLocationSuggestions}
+          onSubmit={searchLocation}
+        />
         {location && sunPeriod && (
           <>
             <CurrentWeather location={location} />

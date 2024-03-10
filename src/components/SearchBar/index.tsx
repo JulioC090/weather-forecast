@@ -13,12 +13,13 @@ export type SearchResult = {
 };
 
 interface SearchBarProps {
+  onQueryChange(query: string): Promise<Array<SearchResult>>;
   onSubmit(result: SearchResult): void;
 }
 
 let timer: number;
 
-function SearchBar({ onSubmit }: SearchBarProps) {
+function SearchBar({ onQueryChange, onSubmit }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -34,7 +35,7 @@ function SearchBar({ onSubmit }: SearchBarProps) {
     inputRef.current?.blur();
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  async function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const query = event.currentTarget.value;
     setSearchQuery(query);
 
@@ -45,13 +46,8 @@ function SearchBar({ onSubmit }: SearchBarProps) {
       clearTimeout(timer);
     }
 
-    timer = setTimeout(() => {
-      fetch(
-        `https://corsproxy.io/?http://geodb-free-service.wirefreethought.com/v1/geo/places?namePrefix=${query}&hateoasMode=false&languageCode=pt_BR&limit=5&offset=0`,
-        { method: 'GET' },
-      )
-        .then((response) => response.json())
-        .then((json) => setResults(json.data));
+    timer = setTimeout(async () => {
+      setResults(await onQueryChange(query));
     }, 500);
   }
 
