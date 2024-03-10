@@ -31,6 +31,7 @@ function SearchBar({ onSubmit }: SearchBarProps) {
     setSearchQuery(result.name);
     onSubmit(result);
     handleBlur();
+    inputRef.current?.blur();
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -103,7 +104,10 @@ function SearchBar({ onSubmit }: SearchBarProps) {
           aria-haspopup="listbox"
           aria-expanded={results.length > 0}
           aria-activedescendant={
-            activedescendant ? results[activedescendant - 1].wikiDataId : ''
+            activedescendant
+              ? results[activedescendant - 1].wikiDataId +
+                (activedescendant - 1)
+              : ''
           }
           className={styles['search-bar__input']}
           type="text"
@@ -133,8 +137,8 @@ function SearchBar({ onSubmit }: SearchBarProps) {
           >
             {results.map((item, index) => (
               <li
-                id={item.wikiDataId}
-                key={item.wikiDataId}
+                id={item.wikiDataId + index}
+                key={item.wikiDataId + index}
                 role="option"
                 className={`${styles['search-bar__item']} ${index === activedescendant - 1 ? styles['search-bar__item--active'] : ''}`}
                 onMouseDown={() => handleSubmit(results[index])}
