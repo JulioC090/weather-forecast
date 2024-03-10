@@ -42,3 +42,8 @@ input {
   align-content: center;
   flex-wrap: wrap;
 }
+
+.no-after::after{
+  content: "";
+  display: none;
+}
