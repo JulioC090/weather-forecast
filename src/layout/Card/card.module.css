@@ -3,8 +3,18 @@
   background-color: var(--foreground);
   border: 2px solid #27272a;
   border-radius: 8px;
+  animation: fade 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .card h2{
   margin-bottom: 24px;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
