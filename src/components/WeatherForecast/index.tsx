@@ -1,10 +1,13 @@
 import Card from '../../layout/Card';
 
-import styles from './weather-forecast.module.css';
-import { formatHour } from '../../utils/formatDate';
-import BrowserView from '../../primitives/BrowserView';
-import { Line, LineChart } from 'recharts';
 import { useEffect, useRef, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import { Line, LineChart } from 'recharts';
+import BrowserView from '../../primitives/BrowserView';
+import Loader from '../../primitives/Loader';
+import WeatherForecastContent from './WeatherForecastContent';
+import WeatherForecastFallback from './WeatherForecastFallback';
+import styles from './weather-forecast.module.css';
 
 export type Forecast = {
   dt: number;
@@ -40,36 +43,33 @@ function WeatherForecast({ forecast }: WeatherForecastProps) {
       <h2>Previsão do Tempo</h2>
       <div className={styles['weather-forecast__list__wrapper']}>
         <div ref={forecastListRef} className={styles['weather-forecast__list']}>
-          {forecast &&
-            forecast.map((forecast) => (
-              <div
-                className={styles['weather-forecast__item']}
-                key={forecast.dt}
-              >
-                <span className={styles['weather-forecast__item__hour']}>
-                  {formatHour(new Date(forecast.dt * 1000))}
-                </span>
-                <img
-                  className={styles['weather-forecast__item__image']}
-                  src={`./${forecast.weather[0].icon}.svg`}
-                  alt={forecast.weather[0].main}
-                />
-                <span className={styles['weather-forecast__item__temperature']}>
-                  {Math.round(forecast.main.temp)}
-                </span>
-              </div>
-            ))}
+          <Loader
+            dependency={forecast}
+            content={<WeatherForecastContent forecast={forecast!} />}
+            fallback={<WeatherForecastFallback />}
+          />
         </div>
         <BrowserView>
-          <LineChart
-            width={listWidth}
-            height={247}
-            data={forecast?.map((forecast) => ({
-              temp: Math.round(forecast.main.temp),
-            }))}
-          >
-            <Line type="monotone" dataKey="temp" dot={false} stroke="#f59e0b" />
-          </LineChart>
+          <Loader
+            dependency={forecast}
+            content={
+              <LineChart
+                width={listWidth}
+                height={247}
+                data={forecast?.map((forecast) => ({
+                  temp: Math.round(forecast.main.temp),
+                }))}
+              >
+                <Line
+                  type="monotone"
+                  dataKey="temp"
+                  dot={false}
+                  stroke="#f59e0b"
+                />
+              </LineChart>
+            }
+            fallback={<Skeleton width={listWidth} height={247} />}
+          />
         </BrowserView>
       </div>
     </Card>
