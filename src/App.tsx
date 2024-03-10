@@ -8,12 +8,17 @@ import SunTime, { SunPeriod } from './components/SunTime';
 import WeatherForecast, { Forecast } from './components/WeatherForecast';
 
 function App() {
-  const [location, setLocation] = useState<SearchResult>();
+  const storageLocation = localStorage.getItem('location');
+
+  const [location, setLocation] = useState<SearchResult>(
+    storageLocation ? JSON.parse(storageLocation) : undefined,
+  );
   const [forecast, setForecast] = useState<Array<Forecast>>();
   const [sunPeriod, setSunPeriod] = useState<SunPeriod>();
 
   function searchLocation(result: SearchResult) {
     setLocation(result);
+    localStorage.setItem('location', JSON.stringify(result));
   }
 
   useEffect(() => {
