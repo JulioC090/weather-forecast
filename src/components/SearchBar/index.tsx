@@ -1,7 +1,7 @@
 import { MagnifyingGlass, MapPin, X } from '@phosphor-icons/react';
 import styles from './search-bar.module.css';
 import { useRef, useState } from 'react';
-import Card from '../Card';
+import Card from '../../layout/Card';
 
 export type SearchResult = {
   wikiDataId: string;

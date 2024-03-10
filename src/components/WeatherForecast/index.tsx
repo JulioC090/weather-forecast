@@ -1,8 +1,8 @@
-import Card from '../Card';
+import Card from '../../layout/Card';
 
 import styles from './weather-forecast.module.css';
 import { formatHour } from '../../utils/formatDate';
-import BrowserView from '../BrowserView';
+import BrowserView from '../../primitives/BrowserView';
 import { Line, LineChart } from 'recharts';
 import { useEffect, useRef, useState } from 'react';
 

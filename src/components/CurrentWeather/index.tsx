@@ -1,5 +1,5 @@
 import { Drop, Gauge, MapPin, Wind } from '@phosphor-icons/react';
-import Card from '../Card';
+import Card from '../../layout/Card';
 
 import styles from './current-weather.module.css';
 import { useEffect, useState } from 'react';

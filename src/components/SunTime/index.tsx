@@ -1,5 +1,5 @@
 import { SunDim, SunHorizon } from '@phosphor-icons/react';
-import Card from '../Card';
+import Card from '../../layout/Card';
 
 import styles from './sun-time.module.css';
 import { formatHourAndMinutes } from '../../utils/formatDate';

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import AirQuality from './components/AirQuality';
-import Container from './components/Container';
+import Container from './layout/Container';
 import CurrentWeather from './components/CurrentWeather';
-import Grid from './components/Grid';
+import Grid from './layout/Grid';
 import SearchBar, { SearchResult } from './components/SearchBar';
 import SunTime, { SunPeriod } from './components/SunTime';
 import WeatherForecast, { Forecast } from './components/WeatherForecast';

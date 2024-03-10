@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Card from '../Card';
+import Card from '../../layout/Card';
 import { SearchResult } from '../SearchBar';
 
 import styles from './air-quality.module.css';
