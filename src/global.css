@@ -36,3 +36,9 @@ input {
 .full-height {
   height: 100%;
 }
+
+.vertical-center{
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+}
