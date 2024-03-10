@@ -47,7 +47,7 @@ function SearchBar({ onSubmit }: SearchBarProps) {
 
     timer = setTimeout(() => {
       fetch(
-        `http://geodb-free-service.wirefreethought.com/v1/geo/places?namePrefix=${query}&hateoasMode=false&languageCode=pt_BR&limit=5&offset=0`,
+        `https://corsproxy.io/?http://geodb-free-service.wirefreethought.com/v1/geo/places?namePrefix=${query}&hateoasMode=false&languageCode=pt_BR&limit=5&offset=0`,
         { method: 'GET' },
       )
         .then((response) => response.json())
