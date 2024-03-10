@@ -21,7 +21,6 @@
 }
 
 .sun-time__path{
-  --progress: 0;
   width: 100%;
   background-color: var(--background);
   border: 2px solid var(--path);
@@ -30,6 +29,7 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   position: relative;
+  transition: 2000ms;
 }
 
 .sun-time__path:has(.sun-time__sun){
@@ -46,8 +46,8 @@
   width: 20px;
   height: 20px;
   position: absolute;
-  left: calc(50% * (1 - cos(pi * var(--progress))));
-  bottom: calc(100% * sin(pi * var(--progress)));
+  left: calc(50% * (1 - cos(pi * (var(--progress)))));
+  bottom: calc(100% * sin(pi * (var(--progress))));
   background-color: #fcd34d;
   border-radius: 50%;
   box-shadow: 0 0 20px #fcd34d80;
