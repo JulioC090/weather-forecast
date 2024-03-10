@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import AirQuality from './components/AirQuality';
-import Container from './layout/Container';
 import CurrentWeather from './components/CurrentWeather';
-import Grid from './layout/Grid';
 import SearchBar, { SearchResult } from './components/SearchBar';
 import SunTime, { SunPeriod } from './components/SunTime';
 import WeatherForecast, { Forecast } from './components/WeatherForecast';
+import Container from './layout/Container';
+import Grid from './layout/Grid';
 
 function App() {
   const storageLocation = localStorage.getItem('location');
@@ -49,22 +51,24 @@ function App() {
   }, [location]);
 
   return (
-    <Container>
-      <Grid>
-        <SearchBar
-          onQueryChange={getLocationSuggestions}
-          onSubmit={searchLocation}
-        />
-        {location && sunPeriod && (
-          <>
-            <CurrentWeather location={location} />
-            <WeatherForecast forecast={forecast} />
-            <AirQuality location={location} />
-            <SunTime sunPeriod={sunPeriod} />
-          </>
-        )}
-      </Grid>
-    </Container>
+    <SkeletonTheme baseColor="#52525b" highlightColor="#71717a">
+      <Container>
+        <Grid>
+          <SearchBar
+            onQueryChange={getLocationSuggestions}
+            onSubmit={searchLocation}
+          />
+          {location && (
+            <>
+              <CurrentWeather location={location} />
+              <WeatherForecast forecast={forecast} />
+              <AirQuality location={location} />
+              <SunTime sunPeriod={sunPeriod} />
+            </>
+          )}
+        </Grid>
+      </Container>
+    </SkeletonTheme>
   );
 }
 
