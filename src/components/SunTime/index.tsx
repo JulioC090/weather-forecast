@@ -1,12 +1,8 @@
 import Card from '../../layout/Card';
+import SunPeriod from '../../models/SunPeriod';
 import Loader from '../../primitives/Loader';
 import SunTimeContent from './SunTimeContent';
 import SunTimeFallback from './SunTimeFallback';
-
-export type SunPeriod = {
-  sunrise: number;
-  sunset: number;
-};
 
 interface SunTimeProps {
   sunPeriod: SunPeriod | undefined;

@@ -1,6 +1,6 @@
 import { SunDim, SunHorizon } from '@phosphor-icons/react';
 import { useEffect, useRef } from 'react';
-import { SunPeriod } from '.';
+import SunPeriod from '../../models/SunPeriod';
 import { formatHourAndMinutes } from '../../utils/formatDate';
 import styles from './sun-time.module.css';
 

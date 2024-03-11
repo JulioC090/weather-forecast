@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Weather } from '../components/CurrentWeather';
 import { SearchResult } from '../components/SearchBar';
-import { SunPeriod } from '../components/SunTime';
 import { Forecast } from '../components/WeatherForecast';
 import LocationGateway from '../gateways/LocationGateway';
 import WeatherGateway from '../gateways/WeatherGateway';
 import AirParams from '../models/AirParams';
+import SunPeriod from '../models/SunPeriod';
 
 function useWeatherInformation(
   locationGateway: LocationGateway,
