@@ -1,6 +1,4 @@
 import Card from '../../layout/Card';
-
-import { useEffect, useState } from 'react';
 import Loader from '../../primitives/Loader';
 import { SearchResult } from '../SearchBar';
 import CurrentWeatherContent from './CurrentWeatherContent';
@@ -34,21 +32,11 @@ export type Weather = {
 };
 
 interface CurrentWeatherProps {
+  weather: Weather | undefined;
   location: SearchResult;
 }
 
-function CurrentWeather({ location }: CurrentWeatherProps) {
-  const [weather, setWeather] = useState<Weather>();
-
-  useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&lang=pt&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
-      { method: 'GET' },
-    )
-      .then((response) => response.json())
-      .then((json) => setWeather(json));
-  }, [location]);
-
+function CurrentWeather({ weather, location }: CurrentWeatherProps) {
   return (
     <Card className={styles['current-weather']}>
       <Loader
