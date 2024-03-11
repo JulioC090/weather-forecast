@@ -6,8 +6,11 @@ import CurrentWeather, { Weather } from './components/CurrentWeather';
 import SearchBar, { SearchResult } from './components/SearchBar';
 import SunTime, { SunPeriod } from './components/SunTime';
 import WeatherForecast, { Forecast } from './components/WeatherForecast';
+import OpenWeatherGateway from './gateways/OpenWeatherGateway';
 import Container from './layout/Container';
 import Grid from './layout/Grid';
+
+const gateway = new OpenWeatherGateway(import.meta.env.VITE_WEATHER_APP_KEY);
 
 function App() {
   const storageLocation = localStorage.getItem('location');
@@ -37,33 +40,22 @@ function App() {
   }
 
   useEffect(() => {
+    async function fetchData() {
+      const {
+        currentWeatherResponse,
+        weatherForecastResponse,
+        airQualityResponse,
+        sunPeriodResponse,
+      } = await gateway.getWeatherInformation(location);
+
+      setWeather(currentWeatherResponse);
+      setForecast(weatherForecastResponse);
+      setAirQuality(airQualityResponse);
+      setSunPeriod(sunPeriodResponse);
+    }
+
     if (!location) return;
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&cnt=8&lang=pt&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
-      { method: 'GET' },
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        setForecast(json.list);
-        setSunPeriod({
-          sunset: json.city.sunset * 1000,
-          sunrise: json.city.sunrise * 1000,
-        });
-      });
-
-    fetch(
-      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
-      { method: 'GET' },
-    )
-      .then((response) => response.json())
-      .then((json) => setAirQuality(json.list[0]));
-
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&lang=pt&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
-      { method: 'GET' },
-    )
-      .then((response) => response.json())
-      .then((json) => setWeather(json));
+    fetchData();
   }, [location]);
 
   return (
