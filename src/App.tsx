@@ -6,11 +6,15 @@ import CurrentWeather, { Weather } from './components/CurrentWeather';
 import SearchBar, { SearchResult } from './components/SearchBar';
 import SunTime, { SunPeriod } from './components/SunTime';
 import WeatherForecast, { Forecast } from './components/WeatherForecast';
+import GeoDBLocationGateway from './gateways/GeoDBSearchLocationsGateway';
 import OpenWeatherGateway from './gateways/OpenWeatherGateway';
 import Container from './layout/Container';
 import Grid from './layout/Grid';
 
-const gateway = new OpenWeatherGateway(import.meta.env.VITE_WEATHER_APP_KEY);
+const locationGateway = new GeoDBLocationGateway();
+const weatherGateway = new OpenWeatherGateway(
+  import.meta.env.VITE_WEATHER_APP_KEY,
+);
 
 function App() {
   const storageLocation = localStorage.getItem('location');
@@ -22,17 +26,6 @@ function App() {
   const [sunPeriod, setSunPeriod] = useState<SunPeriod>();
   const [airQuality, setAirQuality] = useState<AirQualityValues>();
   const [weather, setWeather] = useState<Weather>();
-
-  async function getLocationSuggestions(query: string) {
-    const response = await fetch(
-      `https://corsproxy.io/?http://geodb-free-service.wirefreethought.com/v1/geo/places?namePrefix=${query}&hateoasMode=false&languageCode=pt_BR&limit=5&offset=0`,
-      { method: 'GET' },
-    );
-
-    const data = await response.json();
-
-    return data.data;
-  }
 
   function searchLocation(result: SearchResult) {
     setLocation(result);
@@ -46,7 +39,7 @@ function App() {
         weatherForecastResponse,
         airQualityResponse,
         sunPeriodResponse,
-      } = await gateway.getWeatherInformation(location);
+      } = await weatherGateway.getWeatherInformation(location);
 
       setWeather(currentWeatherResponse);
       setForecast(weatherForecastResponse);
@@ -63,7 +56,9 @@ function App() {
       <Container>
         <Grid>
           <SearchBar
-            onQueryChange={getLocationSuggestions}
+            onQueryChange={async (query) =>
+              await locationGateway.getLocation(query)
+            }
             onSubmit={searchLocation}
           />
           {location && (
