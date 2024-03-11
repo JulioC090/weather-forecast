@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import AirQuality from './components/AirQuality';
+import AirQuality, { AirQualityValues } from './components/AirQuality';
 import CurrentWeather from './components/CurrentWeather';
 import SearchBar, { SearchResult } from './components/SearchBar';
 import SunTime, { SunPeriod } from './components/SunTime';
@@ -17,6 +17,7 @@ function App() {
   );
   const [forecast, setForecast] = useState<Array<Forecast>>();
   const [sunPeriod, setSunPeriod] = useState<SunPeriod>();
+  const [airQuality, setAirQuality] = useState<AirQualityValues>();
 
   async function getLocationSuggestions(query: string) {
     const response = await fetch(
@@ -48,6 +49,13 @@ function App() {
           sunrise: json.city.sunrise * 1000,
         });
       });
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
+      { method: 'GET' },
+    )
+      .then((response) => response.json())
+      .then((json) => setAirQuality(json.list[0]));
   }, [location]);
 
   return (
@@ -62,7 +70,7 @@ function App() {
             <>
               <CurrentWeather location={location} />
               <WeatherForecast forecast={forecast} />
-              <AirQuality location={location} />
+              <AirQuality airQuality={airQuality} />
               <SunTime sunPeriod={sunPeriod} />
             </>
           )}

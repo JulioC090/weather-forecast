@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
 import Card from '../../layout/Card';
 import Loader from '../../primitives/Loader';
-import { SearchResult } from '../SearchBar';
 import AirQualityContent from './AirQualityContent';
 import AirQualityFallback from './AirQualityFallback';
 import styles from './air-quality.module.css';
 
-export type AirQuality = {
+export type AirQualityValues = {
   main: {
     aqi: number;
   };
@@ -23,21 +21,10 @@ export type AirQuality = {
 };
 
 interface AirQualityProps {
-  location: SearchResult;
+  airQuality: AirQualityValues | undefined;
 }
 
-function AirQuality({ location }: AirQualityProps) {
-  const [airQuality, setAirQuality] = useState<AirQuality>();
-
-  useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=${import.meta.env.VITE_WEATHER_APP_KEY}`,
-      { method: 'GET' },
-    )
-      .then((response) => response.json())
-      .then((json) => setAirQuality(json.list[0]));
-  }, [location]);
-
+function AirQuality({ airQuality }: AirQualityProps) {
   return (
     <Card className={styles['air-quality']}>
       <Loader
