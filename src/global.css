@@ -3,6 +3,10 @@
   --foreground: #18181B;
   --text-color: #f9fafb;
   --secondary-text-color: #a1a1aa;
+  --border: #27272a;
+  --border-1: #3f3f46;
+  --hover: #27272a;
+  --hover-1: #3f3f46;
   --focus: #4f46e5;
   --placeholder: #52525b;
 }

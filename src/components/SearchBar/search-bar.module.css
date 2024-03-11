@@ -8,15 +8,21 @@
   align-items: center;
   gap: 12px;
   background-color: var(--foreground);
-  border: 2px solid #27272a;
+  border: 2px solid var(--border);
   border-radius: 8px;
 }
 
+.search-bar__input-container:hover{
+  --border: var(--border-1);
+  background-color: var(--hover);
+}
+
 .search-bar__input-container:has(.search-bar__input[aria-activedescendant=""]:focus){
-  border: var(--focus) 2px solid;
+  --border: var(--focus);
 }
 
 .search-bar__input{
+  background-color: transparent;
   font-size: 16px;
   width: 100%;
 }
@@ -40,6 +46,10 @@
   border: none;
 }
 
+.search-bar__clear-button:hover{
+  background-color: var(--hover-1);
+}
+
 .search-bar__clear-button:focus{
   outline: var(--focus) 2px solid;
 }
@@ -53,14 +63,14 @@
 .search-bar__list{
   list-style: none;
   display: flex;
-  gap: 32px;
+  gap: 16px;
   flex-direction: column;
 }
 
 .search-bar__item{
   display: flex;
   margin: -4px;
-  padding: 4px;
+  padding: 16px;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
@@ -68,6 +78,10 @@
 
 .search-bar__item > svg{
   fill: var(--secondary-text-color);
+}
+
+.search-bar__item:hover{
+  background-color: var(--hover);
 }
 
 .search-bar__item__highlight{
@@ -90,6 +104,7 @@
 }
 
 .search-bar__item--active {
+  background-color: var(--hover);
   outline: var(--focus) 2px solid;
 }
 
