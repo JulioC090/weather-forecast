@@ -2,28 +2,25 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import AirQuality from './components/AirQuality';
 import CurrentWeather from './components/CurrentWeather';
-import SearchBar, { SearchResult } from './components/SearchBar';
+import SearchBar from './components/SearchBar';
 import SunTime from './components/SunTime';
 import WeatherForecast from './components/WeatherForecast';
-import GeoDBLocationGateway from './gateways/GeoDBSearchLocationsGateway';
+import GeoDBSearchLocationsGateway from './gateways/GeoDBSearchLocationsGateway';
+import LocalStorageLocationGateway from './gateways/LocalStorageLocationGateway';
 import OpenWeatherGateway from './gateways/OpenWeatherGateway';
 import useWeatherInformation from './hooks/useWeatherInformation';
 import Container from './layout/Container';
 import Grid from './layout/Grid';
 
-const locationGateway = new GeoDBLocationGateway();
+const searchLocationGateway = new GeoDBSearchLocationsGateway();
+const locationGateway = new LocalStorageLocationGateway();
 const weatherGateway = new OpenWeatherGateway(
   import.meta.env.VITE_WEATHER_APP_KEY,
 );
 
 function App() {
   const { location, setLocation, weather, forecast, airQuality, sunPeriod } =
-    useWeatherInformation(weatherGateway);
-
-  function searchLocation(result: SearchResult) {
-    setLocation(result);
-    localStorage.setItem('location', JSON.stringify(result));
-  }
+    useWeatherInformation(locationGateway, weatherGateway);
 
   return (
     <SkeletonTheme baseColor="#52525b" highlightColor="#71717a">
@@ -31,9 +28,9 @@ function App() {
         <Grid>
           <SearchBar
             onQueryChange={async (query) =>
-              await locationGateway.getLocation(query)
+              await searchLocationGateway.getLocation(query)
             }
-            onSubmit={searchLocation}
+            onSubmit={setLocation}
           />
           {location && (
             <>

@@ -4,18 +4,31 @@ import { Weather } from '../components/CurrentWeather';
 import { SearchResult } from '../components/SearchBar';
 import { SunPeriod } from '../components/SunTime';
 import { Forecast } from '../components/WeatherForecast';
+import LocationGateway from '../gateways/LocationGateway';
 import WeatherGateway from '../gateways/WeatherGateway';
 
-function useWeatherInformation(weatherGateway: WeatherGateway) {
-  const storageLocation = localStorage.getItem('location');
-
-  const [location, setLocation] = useState<SearchResult>(
-    storageLocation ? JSON.parse(storageLocation) : undefined,
-  );
+function useWeatherInformation(
+  locationGateway: LocationGateway,
+  weatherGateway: WeatherGateway,
+) {
+  const [location, setLocationState] = useState<SearchResult>();
   const [forecast, setForecast] = useState<Array<Forecast>>();
   const [sunPeriod, setSunPeriod] = useState<SunPeriod>();
   const [airQuality, setAirQuality] = useState<AirQualityValues>();
   const [weather, setWeather] = useState<Weather>();
+
+  function setLocation(location: SearchResult) {
+    setLocationState(location);
+    locationGateway.save(location);
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      setLocationState(await locationGateway.get());
+    }
+
+    fetchData();
+  }, [locationGateway]);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +37,7 @@ function useWeatherInformation(weatherGateway: WeatherGateway) {
         weatherForecastResponse,
         airQualityResponse,
         sunPeriodResponse,
-      } = await weatherGateway.getWeatherInformation(location);
+      } = await weatherGateway.getWeatherInformation(location!);
 
       setWeather(currentWeatherResponse);
       setForecast(weatherForecastResponse);
