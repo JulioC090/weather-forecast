@@ -1,8 +1,8 @@
-import { AirQuality } from '.';
+import AirParams from '../../models/AirParams';
 import styles from './air-quality.module.css';
 
 interface AirQualityContentProps {
-  airQuality: AirQuality;
+  airQuality: AirParams;
 }
 
 const aqiMap: { [aqi: number]: string } = {
@@ -18,8 +18,8 @@ function AirQualityContent({ airQuality }: AirQualityContentProps) {
     <>
       <div className={styles['wrapper']}>
         <h2>Qualidade do Ar</h2>
-        <span className={styles['tag']} data-aqi={airQuality.main.aqi}>
-          {aqiMap[airQuality.main.aqi]}
+        <span className={styles['tag']} data-aqi={airQuality.aqi}>
+          {aqiMap[airQuality.aqi]}
         </span>
       </div>
       <div className={styles['component-list']}>

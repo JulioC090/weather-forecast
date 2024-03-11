@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { AirQualityValues } from '../components/AirQuality';
 import { Weather } from '../components/CurrentWeather';
 import { SearchResult } from '../components/SearchBar';
 import { SunPeriod } from '../components/SunTime';
 import { Forecast } from '../components/WeatherForecast';
 import LocationGateway from '../gateways/LocationGateway';
 import WeatherGateway from '../gateways/WeatherGateway';
+import AirParams from '../models/AirParams';
 
 function useWeatherInformation(
   locationGateway: LocationGateway,
@@ -14,7 +14,7 @@ function useWeatherInformation(
   const [location, setLocationState] = useState<SearchResult>();
   const [forecast, setForecast] = useState<Array<Forecast>>();
   const [sunPeriod, setSunPeriod] = useState<SunPeriod>();
-  const [airQuality, setAirQuality] = useState<AirQualityValues>();
+  const [airQuality, setAirQuality] = useState<AirParams>();
   const [weather, setWeather] = useState<Weather>();
 
   function setLocation(location: SearchResult) {

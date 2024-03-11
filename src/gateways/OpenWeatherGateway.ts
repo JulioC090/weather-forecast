@@ -1,4 +1,5 @@
 import { SearchResult } from '../components/SearchBar';
+import AirParams from '../models/AirParams';
 import WeatherGateway, { WeatherInformation } from './WeatherGateway';
 
 class OpenWeatherGateway implements WeatherGateway {
@@ -18,13 +19,15 @@ class OpenWeatherGateway implements WeatherGateway {
     return await response.json();
   }
 
-  private async getAirQuality(location: SearchResult) {
+  private async getAirQuality(location: SearchResult): Promise<AirParams> {
     const response = await fetch(
       `${this.baseURL}/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=${this.appid}`,
       { method: 'GET' },
     );
 
-    return (await response.json()).list[0];
+    const data = (await response.json()).list[0];
+
+    return { aqi: data.main.aqi, components: data.components };
   }
 
   private async getWeatherForecast(location: SearchResult) {

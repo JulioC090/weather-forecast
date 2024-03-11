@@ -1,12 +1,12 @@
-import { AirQualityValues } from '../components/AirQuality';
 import { Weather } from '../components/CurrentWeather';
 import { SearchResult } from '../components/SearchBar';
 import { SunPeriod } from '../components/SunTime';
 import { Forecast } from '../components/WeatherForecast';
+import AirParams from '../models/AirParams';
 
 export type WeatherInformation = Promise<{
   currentWeatherResponse: Weather;
-  airQualityResponse: AirQualityValues;
+  airQualityResponse: AirParams;
   weatherForecastResponse: Array<Forecast>;
   sunPeriodResponse: SunPeriod;
 }>;
