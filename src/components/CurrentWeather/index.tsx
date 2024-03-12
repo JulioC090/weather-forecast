@@ -7,7 +7,7 @@ import CurrentWeatherFallback from './CurrentWeatherFallback';
 import styles from './current-weather.module.css';
 
 interface CurrentWeatherProps {
-  weather: Weather | undefined;
+  weather?: Weather;
   location: CityLocation;
 }
 

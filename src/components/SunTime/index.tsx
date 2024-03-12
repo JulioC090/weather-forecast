@@ -5,7 +5,7 @@ import SunTimeContent from './SunTimeContent';
 import SunTimeFallback from './SunTimeFallback';
 
 interface SunTimeProps {
-  sunPeriod: SunPeriod | undefined;
+  sunPeriod?: SunPeriod;
 }
 
 function SunTime({ sunPeriod }: SunTimeProps) {

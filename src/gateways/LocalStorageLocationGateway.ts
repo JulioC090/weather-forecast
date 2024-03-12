@@ -6,7 +6,7 @@ class LocalStorageLocationGateway implements LocationGateway {
 
   async get(): Promise<CityLocation> {
     const storageLocation = localStorage.getItem(this.localStorageKey);
-    return storageLocation ? JSON.parse(storageLocation) : undefined;
+    return storageLocation && JSON.parse(storageLocation);
   }
 
   save(location: CityLocation): void {

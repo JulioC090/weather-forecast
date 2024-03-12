@@ -6,7 +6,7 @@ import AirQualityFallback from './AirQualityFallback';
 import styles from './air-quality.module.css';
 
 interface AirQualityProps {
-  airQuality: AirParams | undefined;
+  airQuality?: AirParams;
 }
 
 function AirQuality({ airQuality }: AirQualityProps) {

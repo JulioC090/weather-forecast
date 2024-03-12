@@ -11,7 +11,7 @@ import WeatherForecastFallback from './WeatherForecastFallback';
 import styles from './weather-forecast.module.css';
 
 interface WeatherForecastProps {
-  forecast: Array<Forecast> | undefined;
+  forecast?: Array<Forecast>;
 }
 
 function WeatherForecast({ forecast }: WeatherForecastProps) {
