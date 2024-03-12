@@ -1,8 +1,8 @@
-import { SearchResult } from '../components/SearchBar';
+import CityLocation from '../models/CityLocation';
 
 interface LocationGateway {
-  get(): Promise<SearchResult>;
-  save(location: SearchResult): void;
+  get(): Promise<CityLocation>;
+  save(location: CityLocation): void;
 }
 
 export default LocationGateway;

@@ -1,6 +1,6 @@
 import Card from '../../layout/Card';
+import CityLocation from '../../models/CityLocation';
 import Loader from '../../primitives/Loader';
-import { SearchResult } from '../SearchBar';
 import CurrentWeatherContent from './CurrentWeatherContent';
 import CurrentWeatherFallback from './CurrentWeatherFallback';
 import styles from './current-weather.module.css';
@@ -33,7 +33,7 @@ export type Weather = {
 
 interface CurrentWeatherProps {
   weather: Weather | undefined;
-  location: SearchResult;
+  location: CityLocation;
 }
 
 function CurrentWeather({ weather, location }: CurrentWeatherProps) {

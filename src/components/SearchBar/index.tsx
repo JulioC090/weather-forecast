@@ -1,20 +1,12 @@
 import { MagnifyingGlass, MapPin, X } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import Card from '../../layout/Card';
+import CityLocation from '../../models/CityLocation';
 import styles from './search-bar.module.css';
 
-export type SearchResult = {
-  wikiDataId: string;
-  name: string;
-  region: string;
-  countryCode: string;
-  latitude: number;
-  longitude: number;
-};
-
 interface SearchBarProps {
-  onQueryChange(query: string): Promise<Array<SearchResult>>;
-  onSubmit(result: SearchResult): void;
+  onQueryChange(query: string): Promise<Array<CityLocation>>;
+  onSubmit(result: CityLocation): void;
 }
 
 let timer: number;
@@ -23,12 +15,12 @@ function SearchBar({ onQueryChange, onSubmit }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState<Array<SearchResult>>([]);
+  const [results, setResults] = useState<Array<CityLocation>>([]);
 
   const [active, setActive] = useState(false);
   const [activedescendant, setActiveDescendant] = useState(0);
 
-  function handleSubmit(result: SearchResult) {
+  function handleSubmit(result: CityLocation) {
     setSearchQuery(result.name);
     onSubmit(result);
     handleBlur();

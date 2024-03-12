@@ -1,5 +1,5 @@
-import { SearchResult } from '../components/SearchBar';
 import AirParams from '../models/AirParams';
+import CityLocation from '../models/CityLocation';
 import WeatherGateway, { WeatherInformation } from './WeatherGateway';
 
 class OpenWeatherGateway implements WeatherGateway {
@@ -10,7 +10,7 @@ class OpenWeatherGateway implements WeatherGateway {
     this.appid = appid;
   }
 
-  private async getCurrentWeather(location: SearchResult) {
+  private async getCurrentWeather(location: CityLocation) {
     const response = await fetch(
       `${this.baseURL}/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&lang=pt&appid=${this.appid}`,
       { method: 'GET' },
@@ -19,7 +19,7 @@ class OpenWeatherGateway implements WeatherGateway {
     return await response.json();
   }
 
-  private async getAirQuality(location: SearchResult): Promise<AirParams> {
+  private async getAirQuality(location: CityLocation): Promise<AirParams> {
     const response = await fetch(
       `${this.baseURL}/air_pollution?lat=${location.latitude}&lon=${location.longitude}&appid=${this.appid}`,
       { method: 'GET' },
@@ -30,7 +30,7 @@ class OpenWeatherGateway implements WeatherGateway {
     return { aqi: data.main.aqi, components: data.components };
   }
 
-  private async getWeatherForecast(location: SearchResult) {
+  private async getWeatherForecast(location: CityLocation) {
     const response = await fetch(
       `${this.baseURL}/forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&cnt=8&lang=pt&appid=${this.appid}`,
       { method: 'GET' },
@@ -39,7 +39,7 @@ class OpenWeatherGateway implements WeatherGateway {
     return await response.json();
   }
 
-  async getWeatherInformation(location: SearchResult): WeatherInformation {
+  async getWeatherInformation(location: CityLocation): WeatherInformation {
     const [
       currentWeatherResponse,
       airQualityResponse,

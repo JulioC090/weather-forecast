@@ -1,11 +1,11 @@
 import { Drop, Gauge, MapPin, Wind } from '@phosphor-icons/react';
 import { Weather } from '.';
-import { SearchResult } from '../SearchBar';
+import CityLocation from '../../models/CityLocation';
 import styles from './current-weather.module.css';
 
 interface CurrentWeatherProps {
   weather: Weather;
-  location: SearchResult;
+  location: CityLocation;
 }
 
 function CurrentWeatherContent({ weather, location }: CurrentWeatherProps) {
