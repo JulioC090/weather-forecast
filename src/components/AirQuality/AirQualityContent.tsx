@@ -14,6 +14,8 @@ const aqiMap: { [aqi: number]: string } = {
 };
 
 function AirQualityContent({ airQuality }: AirQualityContentProps) {
+  const componentList = Object.entries(airQuality.components);
+
   return (
     <>
       <div className={styles['wrapper']}>
@@ -23,30 +25,11 @@ function AirQualityContent({ airQuality }: AirQualityContentProps) {
         </span>
       </div>
       <div className={styles['component-list']}>
-        <div className={styles['component-list__item']}>
-          <span>CO:</span> {airQuality.components.co}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>SO2:</span> {airQuality.components.so2}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>NO:</span> {airQuality.components.no}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>PM2.5:</span> {airQuality.components.pm2_5}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>NO2:</span> {airQuality.components.no2}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>PM10:</span> {airQuality.components.pm10}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>O3:</span> {airQuality.components.o3}
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>NH3:</span> {airQuality.components.nh3}
-        </div>
+        {componentList.map(([key, value]) => (
+          <div key={key} className={styles['component-list__item']}>
+            <span>{key.replace('_', '.')}:</span> {value}
+          </div>
+        ))}
       </div>
     </>
   );

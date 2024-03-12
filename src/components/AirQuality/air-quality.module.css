@@ -36,6 +36,7 @@
 
 .component-list__item{
   width: calc(50% - 16px);
+  text-transform: uppercase;
 }
 
 .component-list__item span {

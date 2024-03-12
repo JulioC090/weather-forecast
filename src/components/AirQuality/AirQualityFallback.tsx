@@ -1,6 +1,8 @@
 import Skeleton from 'react-loading-skeleton';
 import styles from './air-quality.module.css';
 
+const componentsName = ['CO', 'SO2', 'NO', 'PM2.5', 'NO2', 'PM10', 'O3', 'NH3'];
+
 function AirQualityFallback() {
   return (
     <>
@@ -14,30 +16,11 @@ function AirQualityFallback() {
         />
       </div>
       <div className={styles['component-list']}>
-        <div className={styles['component-list__item']}>
-          <span>CO:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>SO2:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>NO:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>PM2.5:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>NO2:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>PM10:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>O3:</span> <Skeleton count={1} width={56} />
-        </div>
-        <div className={styles['component-list__item']}>
-          <span>NH3:</span> <Skeleton count={1} width={56} />
-        </div>
+        {componentsName.map((component) => (
+          <div key={component} className={styles['component-list__item']}>
+            <span>{component}:</span> <Skeleton count={1} width={56} />
+          </div>
+        ))}
       </div>
     </>
   );
