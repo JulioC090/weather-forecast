@@ -1,5 +1,6 @@
 # Weather Forecast
-![image](https://github.com/JulioC090/weather-forecast/assets/64113858/99e25add-b03c-452d-aa76-b212cb4d9116)
+![weather-forecast](https://github.com/JulioC090/weather-forecast/assets/64113858/87b5400b-8267-4003-8347-d311ec7c723c)
+
 
 Um website que oferece informações em tempo real sobre o clima em qualquer cidade do mundo. Utilizando a API da OpenWeather, que disponibiliza dados precisos sobre a temperatura atual e uma previsão detalhada do tempo para os próximos dias.
 
