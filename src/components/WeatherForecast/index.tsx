@@ -3,17 +3,12 @@ import Card from '../../layout/Card';
 import { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Line, LineChart } from 'recharts';
+import Forecast from '../../models/Forecast';
 import BrowserView from '../../primitives/BrowserView';
 import Loader from '../../primitives/Loader';
 import WeatherForecastContent from './WeatherForecastContent';
 import WeatherForecastFallback from './WeatherForecastFallback';
 import styles from './weather-forecast.module.css';
-
-export type Forecast = {
-  dt: number;
-  main: { temp: number };
-  weather: [{ main: string; icon: string }];
-};
 
 interface WeatherForecastProps {
   forecast: Array<Forecast> | undefined;
@@ -57,7 +52,7 @@ function WeatherForecast({ forecast }: WeatherForecastProps) {
                 width={listWidth}
                 height={247}
                 data={forecast?.map((forecast) => ({
-                  temp: Math.round(forecast.main.temp),
+                  temp: Math.round(forecast.temp),
                 }))}
               >
                 <Line

@@ -1,4 +1,4 @@
-import { Forecast } from '.';
+import Forecast from '../../models/Forecast';
 import { formatHour } from '../../utils/formatDate';
 import styles from './weather-forecast.module.css';
 
@@ -11,17 +11,20 @@ function WeatherForecastContent({ forecast }: WeatherForecastContentProps) {
     <>
       {forecast &&
         forecast.map((forecast) => (
-          <div className={styles['weather-forecast__item']} key={forecast.dt}>
+          <div
+            className={styles['weather-forecast__item']}
+            key={forecast.timestamp}
+          >
             <span className={styles['weather-forecast__item__hour']}>
-              {formatHour(new Date(forecast.dt * 1000))}
+              {formatHour(new Date(forecast.timestamp))}
             </span>
             <img
               className={styles['weather-forecast__item__image']}
-              src={`./${forecast.weather[0].icon}.svg`}
-              alt={forecast.weather[0].main}
+              src={`./${forecast.icon}.svg`}
+              alt={forecast.weather}
             />
             <span className={styles['weather-forecast__item__temperature']}>
-              {Math.round(forecast.main.temp)}
+              {Math.round(forecast.temp)}
             </span>
           </div>
         ))}

@@ -50,7 +50,19 @@ class OpenWeatherGateway implements WeatherGateway {
       this.getWeatherForecast(location),
     ]);
 
-    const weatherForecastResponse = forecastAndSunPeriodResponse.list;
+    const weatherForecastResponse = forecastAndSunPeriodResponse.list.map(
+      (forecast: {
+        weather: [{ main: string; icon: string }];
+        main: { temp: number };
+        dt: number;
+      }) => ({
+        weather: forecast.weather[0].main,
+        temp: forecast.main.temp,
+        icon: forecast.weather[0].icon,
+        timestamp: forecast.dt * 1000,
+      }),
+    );
+
     const sunPeriodResponse = {
       sunset: forecastAndSunPeriodResponse.city.sunset * 1000,
       sunrise: forecastAndSunPeriodResponse.city.sunrise * 1000,
