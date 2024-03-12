@@ -52,24 +52,6 @@
   grid-row: 2 / 3;
 }
 
-.location > svg{
-  fill: var(--secondary-text-color);
-}
-
-.location__information > *{
-  display: block;
-  color: var(--secondary-text-color);
-}
-
-.location__city{
-  font-weight: 600;
-  font-size: 12px;
-}
-
-.location__state{
-  font-size: 10px;
-}
-
 .additional-information{
   display: flex;
   justify-content: space-around;

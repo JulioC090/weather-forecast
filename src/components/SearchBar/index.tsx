@@ -1,7 +1,8 @@
-import { MagnifyingGlass, MapPin, X } from '@phosphor-icons/react';
+import { MagnifyingGlass, X } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import Card from '../../layout/Card';
 import CityLocation from '../../models/CityLocation';
+import LocationItem from '../LocationItem';
 import styles from './search-bar.module.css';
 
 interface SearchBarProps {
@@ -139,15 +140,7 @@ function SearchBar({ onQueryChange, onSubmit }: SearchBarProps) {
                 className={`${styles['search-bar__item']} ${index === activedescendant - 1 ? styles['search-bar__item--active'] : ''}`}
                 onMouseDown={() => handleSubmit(results[index])}
               >
-                <MapPin size={32} />
-                <div className={styles['search-bar__item__information']}>
-                  <span className={styles['search-bar__item__city']}>
-                    {item.name}, {item.countryCode}
-                  </span>
-                  <span className={styles['search-bar__item__state']}>
-                    {item.region}
-                  </span>
-                </div>
+                <LocationItem location={item} />
               </li>
             ))}
           </ul>

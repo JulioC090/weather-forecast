@@ -1,0 +1,22 @@
+.location {
+  display: flex;
+  gap: 8px;
+}
+
+.location > svg {
+  fill: var(--secondary-text-color);
+}
+
+.location__item__information > *{
+  display: block;
+  color: var(--secondary-text-color);
+}
+
+.location__item__city{
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.location__item__state{
+  font-size: 12px;
+}

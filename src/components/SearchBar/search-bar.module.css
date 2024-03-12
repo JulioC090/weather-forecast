@@ -68,39 +68,14 @@
 }
 
 .search-bar__item{
-  display: flex;
   margin: -4px;
   padding: 16px;
   align-items: center;
-  gap: 8px;
   border-radius: 8px;
-}
-
-.search-bar__item > svg{
-  fill: var(--secondary-text-color);
 }
 
 .search-bar__item:hover{
   background-color: var(--hover);
-}
-
-.search-bar__item__highlight{
-  display: inline;
-  color: var(--text-color)
-}
-
-.search-bar__item__information > *{
-  display: block;
-  color: var(--secondary-text-color);
-}
-
-.search-bar__item__city{
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.search-bar__item__state{
-  font-size: 12px;
 }
 
 .search-bar__item--active {
