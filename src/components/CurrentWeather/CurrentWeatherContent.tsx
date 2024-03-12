@@ -1,6 +1,6 @@
 import { Drop, Gauge, MapPin, Wind } from '@phosphor-icons/react';
-import { Weather } from '.';
 import CityLocation from '../../models/CityLocation';
+import Weather from '../../models/Weather';
 import styles from './current-weather.module.css';
 
 interface CurrentWeatherProps {
@@ -13,15 +13,15 @@ function CurrentWeatherContent({ weather, location }: CurrentWeatherProps) {
     <>
       <img
         className={styles['image']}
-        src={`./${weather.weather[0].icon}.svg`}
-        alt={weather.weather[0].main}
+        src={`./${weather.icon}.svg`}
+        alt={weather.name}
       />
       <div className={styles['main']}>
         <span className={styles['main__description']}>
-          {weather?.weather[0].description}
+          {weather.description}
         </span>
         <span className={styles['main__temperature']}>
-          {Math.round(weather?.main.temp)}
+          {Math.round(weather.temp)}
         </span>
       </div>
       <div className={styles['location']}>
@@ -37,7 +37,7 @@ function CurrentWeatherContent({ weather, location }: CurrentWeatherProps) {
         <div className={styles['additional-information__item']}>
           <Drop size={24} />
           <span className={styles['additional-information__value']}>
-            {weather.main.humidity}
+            {weather.humidity}
           </span>
           <span className={styles['additional-information__label']}>
             Umidade
@@ -46,7 +46,7 @@ function CurrentWeatherContent({ weather, location }: CurrentWeatherProps) {
         <div className={styles['additional-information__item']}>
           <Gauge size={24} />
           <span className={styles['additional-information__value']}>
-            {weather.main.pressure}
+            {weather.pressure}
           </span>
           <span className={styles['additional-information__label']}>
             Pressão
@@ -55,7 +55,7 @@ function CurrentWeatherContent({ weather, location }: CurrentWeatherProps) {
         <div className={styles['additional-information__item']}>
           <Wind size={24} />
           <span className={styles['additional-information__value']}>
-            {weather.wind.speed}
+            {weather.wind}
           </span>
           <span className={styles['additional-information__label']}>Vento</span>
         </div>

@@ -1,8 +1,8 @@
-import { Weather } from '../components/CurrentWeather';
 import AirParams from '../models/AirParams';
 import CityLocation from '../models/CityLocation';
 import Forecast from '../models/Forecast';
 import SunPeriod from '../models/SunPeriod';
+import Weather from '../models/Weather';
 
 export type WeatherInformation = Promise<{
   currentWeatherResponse: Weather;

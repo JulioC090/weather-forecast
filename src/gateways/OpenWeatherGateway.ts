@@ -1,5 +1,6 @@
 import AirParams from '../models/AirParams';
 import CityLocation from '../models/CityLocation';
+import Weather from '../models/Weather';
 import WeatherGateway, { WeatherInformation } from './WeatherGateway';
 
 class OpenWeatherGateway implements WeatherGateway {
@@ -10,13 +11,23 @@ class OpenWeatherGateway implements WeatherGateway {
     this.appid = appid;
   }
 
-  private async getCurrentWeather(location: CityLocation) {
+  private async getCurrentWeather(location: CityLocation): Promise<Weather> {
     const response = await fetch(
       `${this.baseURL}/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&lang=pt&appid=${this.appid}`,
       { method: 'GET' },
     );
 
-    return await response.json();
+    const data = await response.json();
+
+    return {
+      name: data.weather[0].main,
+      description: data.weather[0].description,
+      icon: data.weather[0].icon,
+      temp: data.main.temp,
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      wind: data.wind.speed,
+    };
   }
 
   private async getAirQuality(location: CityLocation): Promise<AirParams> {
